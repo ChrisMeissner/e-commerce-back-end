@@ -6,6 +6,16 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', (req, res) => {
   // find all products
+  Product.findAll({
+    attributes: [
+      'id',
+      'product_name',
+      'price',
+      'stock',
+      [sequelize.literal('(SELECT COUNT(*) FROM category WHERE product.id = category.product_id)'), 'category_id'],
+      // ??? Did I do this wrong???
+    ]
+  })
   // be sure to include its associated Category and Tag data
 });
 
