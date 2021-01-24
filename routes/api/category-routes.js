@@ -1,13 +1,16 @@
 const router = require('express').Router();
-const { Category, Product, Tag } = require('../../models');
-const sequelize = require('../../config/connection');
+const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
 router.get('/', (req, res) => {
   // find all categories
   Category.findAll({
-    include: [Product]
+    include: [
+      {
+        model: Product
+      }
+    ]
   })
   // be sure to include its associated Products
     .then(dbCategoryData => res.json(dbCategoryData))
@@ -23,24 +26,19 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: [
-      'id',
-      'category_name',
-      //?????? [sequelize.literal]
-    ],
     include: [
       {
         model: Product
-        // ??? Does this model also have attributes???
       }
     ]
   })
   // be sure to include its associated Products
     .then(dbCategoryData => {
       if (!dbCategoryData) {
-        res.status(404).json({ message: 'no product found within this category' });
+        res.status(404).json({ message: 'no category found with this id!' });
         return;
       }
+      res.json(dbCategoryData);
     })
     .catch(err => {
       console.log(err);
@@ -51,11 +49,11 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   Category.create({
-    id: req.body.id,
     category_name: req.body.category_name
   })
     .then(dbCategoryData => res.json(dbCategoryData))
     .catch(err => {
+      console.log(err);
       res.status(500).json(err);
     })
 });
