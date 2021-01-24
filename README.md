@@ -1,7 +1,11 @@
 # e-commerce-back-end
 
+##Video Walkthrough
+<iframe src="https://drive.google.com/file/d/15OzAE_5v1UX00L1BEjOha_7OJZ1j2oEN/preview" width="640" height="480"></iframe>
+Link: https://drive.google.com/file/d/15OzAE_5v1UX00L1BEjOha_7OJZ1j2oEN/view
+
 ## Description
-This application is the backend for an ecommerce website.
+This application is the backend for an ecommerce website. You can use CRUD methods to check and alter the database. 
 
 ## Table of Contents
 * [Installation]
@@ -12,7 +16,8 @@ This application is the backend for an ecommerce website.
 * [Questions](#questions)
 
 ## Installation
-npm i
+npm run seeds
+npm run start
 
 ## Usage
 
@@ -21,7 +26,7 @@ npm i
 Chris Meissner
 
 ## Tests
-npm test
+
 
 ## Questions
 If you have any questions, contact christophermssnr@gmail.com
